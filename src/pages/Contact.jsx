@@ -62,7 +62,7 @@ const Contact = ({ language }) => {
             className="bg-tertiary dark:bg-slate-800 rounded-2xl p-8 shadow-card"
           >
             <form
-              action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID"
+              action="https://formspree.io/f/mdkgkwdw"
               method="POST"
               ref={formRef}
             >
