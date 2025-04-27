@@ -6,4 +6,10 @@ export default defineConfig({
   plugins: [react()],
   // Using the correct GitHub repository name for deployment
   base: '/portfolio3d/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
+    sourcemap: false,
+  },
 })
