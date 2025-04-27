@@ -87,11 +87,14 @@ const ProjectCard = ({ project, t }) => {
       className="bg-tertiary dark:bg-slate-800 rounded-2xl p-5 shadow-card"
     >
       <div className="relative w-full h-[230px] mb-4">
-        <div className="w-full h-full rounded-xl overflow-hidden">
+        <div className="w-full h-full rounded-xl overflow-hidden bg-gray-800">
           <img
             src={project.image}
             alt={project.title}
+            loading="lazy" // Add lazy loading
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+            onLoad={(e) => e.target.classList.add('opacity-100')}
+            style={{ opacity: 0, transition: 'opacity 0.3s ease-in-out' }}
           />
         </div>
       </div>

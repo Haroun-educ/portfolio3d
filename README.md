@@ -75,6 +75,29 @@ The project is configured to deploy automatically to GitHub Pages using GitHub A
 - Add your own 3D models in the `src/models` directory
 - Modify colors and styling in the Tailwind configuration
 
+## Performance Optimization
+
+### Image Optimization
+For better performance, especially on mobile devices:
+
+1. Compress all images before adding them to the project
+   - Use tools like [TinyPNG](https://tinypng.com/) or [Squoosh](https://squoosh.app/)
+   - Aim for image sizes under 200KB when possible
+   - Use WebP format instead of JPG/PNG for better compression
+
+2. Use appropriate image dimensions
+   - Don't use images larger than needed for their display size
+   - Consider creating different sizes for different devices
+
+### 3D Performance
+The 3D elements can be resource-intensive on mobile devices:
+
+1. The site automatically disables 3D on mobile devices
+2. For further optimization, you can:
+   - Reduce polygon count in 3D models
+   - Use simpler materials
+   - Implement level-of-detail (LOD) for complex scenes
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
