@@ -48,70 +48,6 @@ const Contact = ({ language }) => {
   const t = content[language];
 
   const formRef = useRef();
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null); // null, 'success', or 'error'
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    // Simulate form submission
-    setTimeout(() => {
-      setLoading(false);
-      setStatus('success');
-      setForm({
-        name: '',
-        email: '',
-        message: '',
-      });
-
-      // Reset status after 5 seconds
-      setTimeout(() => {
-        setStatus(null);
-      }, 5000);
-    }, 2000);
-
-    // In a real application, you would send the form data to a server
-    // Example with emailjs:
-    /*
-    emailjs.send(
-      'service_id',
-      'template_id',
-      {
-        from_name: form.name,
-        to_name: 'Your Name',
-        from_email: form.email,
-        to_email: 'your.email@example.com',
-        message: form.message,
-      },
-      'public_key'
-    )
-    .then(() => {
-      setLoading(false);
-      setStatus('success');
-      setForm({
-        name: '',
-        email: '',
-        message: '',
-      });
-    })
-    .catch((error) => {
-      setLoading(false);
-      setStatus('error');
-      console.log(error);
-    });
-    */
-  };
 
   return (
     <div className="w-full">
@@ -125,7 +61,11 @@ const Contact = ({ language }) => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-tertiary dark:bg-slate-800 rounded-2xl p-8 shadow-card"
           >
-            <form ref={formRef} onSubmit={handleSubmit}>
+            <form
+              action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID"
+              method="POST"
+              ref={formRef}
+            >
               <div className="mb-4">
                 <label htmlFor="name" className="block text-white mb-2">
                   {t.name}
@@ -134,8 +74,6 @@ const Contact = ({ language }) => {
                   type="text"
                   name="name"
                   id="name"
-                  value={form.name}
-                  onChange={handleChange}
                   required
                   className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -149,8 +87,6 @@ const Contact = ({ language }) => {
                   type="email"
                   name="email"
                   id="email"
-                  value={form.email}
-                  onChange={handleChange}
                   required
                   className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -164,8 +100,6 @@ const Contact = ({ language }) => {
                   name="message"
                   id="message"
                   rows="5"
-                  value={form.message}
-                  onChange={handleChange}
                   required
                   className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 ></textarea>
@@ -173,19 +107,10 @@ const Contact = ({ language }) => {
 
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 transition-colors rounded-lg text-white font-medium disabled:opacity-70"
+                className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 transition-colors rounded-lg text-white font-medium"
               >
-                {loading ? t.sending : t.send}
+                {t.send}
               </button>
-
-              {status === 'success' && (
-                <p className="mt-4 text-green-400 text-center">{t.success}</p>
-              )}
-
-              {status === 'error' && (
-                <p className="mt-4 text-red-400 text-center">{t.error}</p>
-              )}
             </form>
           </motion.div>
 
