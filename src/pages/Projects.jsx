@@ -99,10 +99,10 @@ const ProjectCard = ({ project, t }) => {
   // Use effect to simulate loading for images that might be cached
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (!imageLoaded && !isOptimizing) setImageLoaded(true);
+      if (!imageLoaded) setImageLoaded(true);
     }, 1000);
     return () => clearTimeout(timer);
-  }, [imageLoaded, isOptimizing]);
+  }, [imageLoaded]);
 
   return (
     <motion.div

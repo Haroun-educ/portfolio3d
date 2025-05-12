@@ -83,25 +83,25 @@ const FloatingPlanet = () => {
     });
   }, []);
 
-  // Memoize geometries for better performance
-  const planetGeometry = useMemo(() => new THREE.SphereGeometry(1.2, 64, 64), []);
-  const atmosphereGeometry = useMemo(() => new THREE.SphereGeometry(1.5, 64, 64), []);
-  const ringGeometry = useMemo(() => new THREE.TorusGeometry(2, 0.15, 32, 100), []);
-  const smallRingGeometry = useMemo(() => new THREE.TorusGeometry(2.5, 0.08, 16, 100), []);
+  // Memoize geometries for better performance - reduced polygon count
+  const planetGeometry = useMemo(() => new THREE.SphereGeometry(1.2, 32, 32), []);
+  const atmosphereGeometry = useMemo(() => new THREE.SphereGeometry(1.5, 32, 32), []);
+  const ringGeometry = useMemo(() => new THREE.TorusGeometry(2, 0.15, 16, 50), []);
+  const smallRingGeometry = useMemo(() => new THREE.TorusGeometry(2.5, 0.08, 8, 50), []);
 
-  // Generate random stars positions
+  // Generate random stars positions - reduced count for better performance
   const starPositions = useMemo(() => {
-    return Array.from({ length: 100 }).map(() => [
+    return Array.from({ length: 50 }).map(() => [
       (Math.random() - 0.5) * 20,
       (Math.random() - 0.5) * 20,
       (Math.random() - 0.5) * 20
     ]);
   }, []);
 
-  // Generate random orbital particles
+  // Generate random orbital particles - reduced count for better performance
   const orbitalParticles = useMemo(() => {
-    return Array.from({ length: 30 }).map((_, i) => {
-      const angle = (i / 30) * Math.PI * 2;
+    return Array.from({ length: 15 }).map((_, i) => {
+      const angle = (i / 15) * Math.PI * 2;
       const radius = 3 + Math.random() * 0.5;
       return {
         position: [
@@ -298,10 +298,14 @@ const Experience = () => {
           depth: true,
         }}
         className="w-full h-full"
-        dpr={[1, 1.5]} // Limit pixel ratio for better performance
-        performance={{ min: 0.5 }} // Allow frame rate to drop for better performance
+        dpr={[0.8, 1.2]} // Further reduced pixel ratio for better performance
+        performance={{ min: 0.3 }} // Allow more frame rate drop for better performance
         onCreated={({ gl }) => {
-          gl.setClearColor(new THREE.Color(0x000020), 0);
+          try {
+            gl.setClearColor(new THREE.Color(0x000020), 0);
+          } catch (error) {
+            console.error('Error setting clear color:', error);
+          }
         }}
       >
         <Renderer>
