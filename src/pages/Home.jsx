@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import Experience from '../components/Experience';
+import profileImage from '../assets/images/profile.jpg';
 
 // Import page components
 import About from './About';
@@ -83,7 +84,7 @@ const Home = ({ language }) => {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-600/20 animate-pulse"></div>
 
               <img
-                src="/images/profile.jpg"
+                src={profileImage}
                 alt="Mohamed Haroun"
                 className="w-full h-full object-cover relative z-10"
                 loading="eager"

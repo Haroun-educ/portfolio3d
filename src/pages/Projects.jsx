@@ -2,6 +2,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { debounce } from '../utils/performance';
 
+// Import project images
+import project1Image from '../assets/images/project1-min.jpg';
+import project2Image from '../assets/images/project2-min.jpg';
+import project3Image from '../assets/images/project3-min.jpg';
+import project4Image from '../assets/images/project4-min.jpg';
+import project5Image from '../assets/images/project5-min.jpg';
+
 // Language content
 const content = {
   en: {
@@ -35,7 +42,7 @@ const projectsData = [
   {
     title: "3D Portfolio Website",
     description: "A creative and interactive portfolio website built with React, Three.js, and Tailwind CSS to showcase my skills and projects.",
-    image: "/images/project1-min.jpg",
+    image: project1Image,
     tags: ["React", "Three.js", "Tailwind CSS"],
     category: "web",
     source_code_link: "https://github.com/Haroun-educ/portfolio",
@@ -44,7 +51,7 @@ const projectsData = [
   {
     title: "Simple Calculator",
     description: "A basic calculator application built with Python that can perform arithmetic operations.",
-    image: "/images/project2-min.jpg",
+    image: project2Image,
     tags: ["Python", "Tkinter"],
     category: "web",
     source_code_link: null,
@@ -53,7 +60,7 @@ const projectsData = [
   {
     title: "Snake Game",
     description: "A classic Snake game implemented in Python where the player controls a snake to eat food and grow without hitting walls or itself.",
-    image: "/images/project3-min.jpg",
+    image: project3Image,
     tags: ["Python", "Pygame"],
     category: "web",
     source_code_link: null,
@@ -62,7 +69,7 @@ const projectsData = [
   {
     title: "Smart City System",
     description: "A planned future project to develop a modular system for smart cities, integrating IoT devices, data analytics, and user interfaces.",
-    image: "/images/project4-min.jpg",
+    image: project4Image,
     tags: ["IoT", "Python", "Web Development"],
     category: "robotics",
     source_code_link: null,
@@ -71,7 +78,7 @@ const projectsData = [
   {
     title: "Line Following Robot",
     description: "A robotics project where a small robot follows a line on the ground using sensors and microcontrollers.",
-    image: "/images/project1-min.jpg",
+    image: project5Image,
     tags: ["Arduino", "Robotics", "C++"],
     category: "robotics",
     source_code_link: null,

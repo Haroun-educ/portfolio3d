@@ -222,18 +222,17 @@ const Renderer = ({ children }) => {
   return children;
 };
 
-// Loading fallback component
-const LoadingFallback = () => {
+// Simple fallback component
+const SimpleFallback = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-blue-900 to-black">
-      <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-full h-full bg-gradient-to-b from-blue-900 to-black">
+      {/* Empty fallback */}
     </div>
   );
 };
 
 const Experience = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const canvasRef = useRef();
 
   // Debounced resize handler
@@ -256,15 +255,9 @@ const Experience = () => {
 
     window.addEventListener('resize', debouncedResize);
 
-    // Set loaded state after a delay
-    const loadTimer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 500);
-
     return () => {
       window.removeEventListener('resize', debouncedResize);
       clearTimeout(timeoutId);
-      clearTimeout(loadTimer);
     };
   }, [handleResize]);
 
@@ -309,7 +302,7 @@ const Experience = () => {
         }}
       >
         <Renderer>
-          <Suspense fallback={<LoadingFallback />}>
+          <Suspense fallback={<SimpleFallback />}>
             <OrbitControls
               enableZoom={false}
               autoRotate
