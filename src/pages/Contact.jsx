@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 // Language content
@@ -20,7 +20,11 @@ const content = {
     emailValue: "harounneduc@gmail.com",
     phone: "Phone",
     phoneValue: "+212 667-637908",
-    socialProfiles: "Social Profiles"
+    socialProfiles: "Social Profiles",
+    nameRequired: "Please enter your name",
+    emailRequired: "Please enter your email",
+    emailInvalid: "Please enter a valid email",
+    messageRequired: "Please enter your message"
   },
   fr: {
     title: "Contactez-Moi",
@@ -39,7 +43,11 @@ const content = {
     emailValue: "harounneduc@gmail.com",
     phone: "Téléphone",
     phoneValue: "+212 667-637908",
-    socialProfiles: "Profils Sociaux"
+    socialProfiles: "Profils Sociaux",
+    nameRequired: "Veuillez entrer votre nom",
+    emailRequired: "Veuillez entrer votre email",
+    emailInvalid: "Veuillez entrer un email valide",
+    messageRequired: "Veuillez entrer votre message"
   }
 };
 
@@ -48,6 +56,96 @@ const Contact = ({ language }) => {
   const t = content[language];
 
   const formRef = useRef();
+  const [formStatus, setFormStatus] = useState('idle'); // 'idle', 'submitting', 'success', 'error'
+  const [formErrors, setFormErrors] = useState({});
+  const [formValues, setFormValues] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  // Reset form status after 5 seconds of success or error
+  useEffect(() => {
+    if (formStatus === 'success' || formStatus === 'error') {
+      const timer = setTimeout(() => {
+        setFormStatus('idle');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [formStatus]);
+
+  // Handle form input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value
+    });
+
+    // Clear error for this field when user starts typing
+    if (formErrors[name]) {
+      setFormErrors({
+        ...formErrors,
+        [name]: ''
+      });
+    }
+  };
+
+  // Validate form
+  const validateForm = () => {
+    const errors = {};
+
+    if (!formValues.name.trim()) {
+      errors.name = t.nameRequired;
+    }
+
+    if (!formValues.email.trim()) {
+      errors.email = t.emailRequired;
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email)) {
+      errors.email = t.emailInvalid;
+    }
+
+    if (!formValues.message.trim()) {
+      errors.message = t.messageRequired;
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setFormStatus('submitting');
+
+    try {
+      const form = formRef.current;
+      const formData = new FormData(form);
+
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          Accept: 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormValues({ name: '', email: '', message: '' });
+      } else {
+        setFormStatus('error');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setFormStatus('error');
+    }
+  };
 
   return (
     <div className="w-full">
@@ -65,7 +163,21 @@ const Contact = ({ language }) => {
               action="https://formspree.io/f/mdkgkwdw"
               method="POST"
               ref={formRef}
+              onSubmit={handleSubmit}
             >
+              {/* Form status messages */}
+              {formStatus === 'success' && (
+                <div className="mb-4 p-3 bg-green-500/20 border border-green-500 rounded-lg text-green-200">
+                  {t.success}
+                </div>
+              )}
+
+              {formStatus === 'error' && (
+                <div className="mb-4 p-3 bg-red-500/20 border border-red-500 rounded-lg text-red-200">
+                  {t.error}
+                </div>
+              )}
+
               <div className="mb-4">
                 <label htmlFor="name" className="block text-white mb-2">
                   {t.name}
@@ -74,9 +186,15 @@ const Contact = ({ language }) => {
                   type="text"
                   name="name"
                   id="name"
-                  required
-                  className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={formValues.name}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    formErrors.name ? 'border border-red-500' : ''
+                  }`}
                 />
+                {formErrors.name && (
+                  <p className="mt-1 text-sm text-red-400">{formErrors.name}</p>
+                )}
               </div>
 
               <div className="mb-4">
@@ -87,9 +205,15 @@ const Contact = ({ language }) => {
                   type="email"
                   name="email"
                   id="email"
-                  required
-                  className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={formValues.email}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    formErrors.email ? 'border border-red-500' : ''
+                  }`}
                 />
+                {formErrors.email && (
+                  <p className="mt-1 text-sm text-red-400">{formErrors.email}</p>
+                )}
               </div>
 
               <div className="mb-6">
@@ -100,16 +224,27 @@ const Contact = ({ language }) => {
                   name="message"
                   id="message"
                   rows="5"
-                  required
-                  className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={formValues.message}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    formErrors.message ? 'border border-red-500' : ''
+                  }`}
                 ></textarea>
+                {formErrors.message && (
+                  <p className="mt-1 text-sm text-red-400">{formErrors.message}</p>
+                )}
               </div>
 
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 transition-colors rounded-lg text-white font-medium"
+                disabled={formStatus === 'submitting'}
+                className={`w-full px-6 py-3 ${
+                  formStatus === 'submitting'
+                    ? 'bg-blue-500 cursor-not-allowed'
+                    : 'bg-blue-600 hover:bg-blue-700'
+                } transition-colors rounded-lg text-white font-medium`}
               >
-                {t.send}
+                {formStatus === 'submitting' ? t.sending : t.send}
               </button>
             </form>
           </motion.div>

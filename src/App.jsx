@@ -10,17 +10,31 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
-  const [language, setLanguage] = useState('en'); // 'en' for English, 'fr' for French
+  // Initialize state from localStorage or use defaults
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    return savedMode !== null ? JSON.parse(savedMode) : true;
+  });
 
-  // Apply dark mode class to html element
+  const [language, setLanguage] = useState(() => {
+    const savedLanguage = localStorage.getItem('language');
+    return savedLanguage || 'en'; // 'en' for English, 'fr' for French
+  });
+
+  // Apply dark mode class to html element and save to localStorage
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
+
+  // Save language preference to localStorage
+  useEffect(() => {
+    localStorage.setItem('language', language);
+  }, [language]);
 
   return (
     <Router>
