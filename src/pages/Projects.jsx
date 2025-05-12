@@ -34,16 +34,16 @@ const projectsData = [
   {
     title: "3D Portfolio Website",
     description: "A creative and interactive portfolio website built with React, Three.js, and Tailwind CSS to showcase my skills and projects.",
-    image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png",
     tags: ["React", "Three.js", "Tailwind CSS"],
     category: "web",
     source_code_link: "https://github.com/Haroun-educ/portfolio",
-    live_demo_link: "https://haroun-educ.github.io/portfolio"
+    live_demo_link: "https://haroun-educ.github.io/portfolio3d/"
   },
   {
     title: "Simple Calculator",
     description: "A basic calculator application built with Python that can perform arithmetic operations.",
-    image: "https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://cdn.pixabay.com/photo/2016/09/08/04/12/calculator-1653680_1280.jpg",
     tags: ["Python", "Tkinter"],
     category: "web",
     source_code_link: null,
@@ -52,7 +52,7 @@ const projectsData = [
   {
     title: "Snake Game",
     description: "A classic Snake game implemented in Python where the player controls a snake to eat food and grow without hitting walls or itself.",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://cdn.pixabay.com/photo/2016/10/11/02/04/python-1730343_1280.png",
     tags: ["Python", "Pygame"],
     category: "web",
     source_code_link: null,
@@ -61,7 +61,7 @@ const projectsData = [
   {
     title: "Smart City System",
     description: "A planned future project to develop a modular system for smart cities, integrating IoT devices, data analytics, and user interfaces.",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://cdn.pixabay.com/photo/2018/03/15/16/11/background-3229476_1280.jpg",
     tags: ["IoT", "Python", "Web Development"],
     category: "robotics",
     source_code_link: null,
@@ -70,7 +70,7 @@ const projectsData = [
   {
     title: "Line Following Robot",
     description: "A robotics project where a small robot follows a line on the ground using sensors and microcontrollers.",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://cdn.pixabay.com/photo/2019/07/17/22/07/robot-4345164_1280.jpg",
     tags: ["Arduino", "Robotics", "C++"],
     category: "robotics",
     source_code_link: null,
