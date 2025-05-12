@@ -35,7 +35,7 @@ const projectsData = [
   {
     title: "3D Portfolio Website",
     description: "A creative and interactive portfolio website built with React, Three.js, and Tailwind CSS to showcase my skills and projects.",
-    image: "/assets/images/project1-min.jpg",
+    image: "/images/project1-min.jpg",
     tags: ["React", "Three.js", "Tailwind CSS"],
     category: "web",
     source_code_link: "https://github.com/Haroun-educ/portfolio",
@@ -44,7 +44,7 @@ const projectsData = [
   {
     title: "Simple Calculator",
     description: "A basic calculator application built with Python that can perform arithmetic operations.",
-    image: "/assets/images/project2-min.jpg",
+    image: "/images/project2-min.jpg",
     tags: ["Python", "Tkinter"],
     category: "web",
     source_code_link: null,
@@ -53,7 +53,7 @@ const projectsData = [
   {
     title: "Snake Game",
     description: "A classic Snake game implemented in Python where the player controls a snake to eat food and grow without hitting walls or itself.",
-    image: "/assets/images/project3-min.jpg",
+    image: "/images/project3-min.jpg",
     tags: ["Python", "Pygame"],
     category: "web",
     source_code_link: null,
@@ -62,7 +62,7 @@ const projectsData = [
   {
     title: "Smart City System",
     description: "A planned future project to develop a modular system for smart cities, integrating IoT devices, data analytics, and user interfaces.",
-    image: "/assets/images/project4-min.jpg",
+    image: "/images/project4-min.jpg",
     tags: ["IoT", "Python", "Web Development"],
     category: "robotics",
     source_code_link: null,
@@ -71,7 +71,7 @@ const projectsData = [
   {
     title: "Line Following Robot",
     description: "A robotics project where a small robot follows a line on the ground using sensors and microcontrollers.",
-    image: "/assets/images/project1-min.jpg",
+    image: "/images/project1-min.jpg",
     tags: ["Arduino", "Robotics", "C++"],
     category: "robotics",
     source_code_link: null,
@@ -81,21 +81,14 @@ const projectsData = [
 
 const ProjectCard = ({ project, t }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [optimizedImageSrc, setOptimizedImageSrc] = useState('');
-  const [isOptimizing, setIsOptimizing] = useState(true);
 
-  // Set image path directly
+  // Use effect to simulate loading for images that might be cached
   useEffect(() => {
-    const fullImagePath = import.meta.env.BASE_URL + project.image;
-    setOptimizedImageSrc(fullImagePath);
-
-    // Set loading state to false after a short delay
     const timer = setTimeout(() => {
-      setIsOptimizing(false);
-    }, 300);
-
+      if (!imageLoaded) setImageLoaded(true);
+    }, 1000);
     return () => clearTimeout(timer);
-  }, [project.image]);
+  }, [imageLoaded]);
 
   // Handle image load event
   const handleImageLoad = (e) => {
@@ -126,7 +119,7 @@ const ProjectCard = ({ project, t }) => {
             </div>
           )}
           <img
-            src={optimizedImageSrc || (import.meta.env.BASE_URL + project.image)}
+            src={project.image}
             alt={project.title}
             loading="lazy"
             decoding="async"

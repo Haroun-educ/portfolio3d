@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import profileImage2 from '../assets/images/profile2.jpg';
 
 // Language content
 const content = {
@@ -140,7 +139,7 @@ const About = ({ language }) => {
             <div className="w-full max-w-sm bg-tertiary dark:bg-slate-800 rounded-2xl p-6 shadow-card">
               <div className="w-full h-64 rounded-xl mb-4 overflow-hidden">
                 <img
-                  src={profileImage2}
+                  src="/images/profile2.jpg"
                   alt="Mohamed Haroun Profile"
                   className="w-full h-full object-cover"
                 />
