@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Experience from '../components/Experience';
 import profileImage from '../assets/images/profile.jpg';
+import { optimizeImage } from '../utils/performance';
 
 // Import page components
 import About from './About';
@@ -44,6 +45,26 @@ const Home = ({ language }) => {
   // Text content based on selected language
   const t = content[language];
   const aboutRef = useRef(null);
+  const [optimizedProfileImage, setOptimizedProfileImage] = useState('');
+
+  // Optimize profile image on component mount
+  useEffect(() => {
+    // First load a low quality version
+    optimizeImage(profileImage, { quality: 40, width: 200, blur: true })
+      .then(lowQualitySrc => {
+        setOptimizedProfileImage(lowQualitySrc);
+
+        // Then load the higher quality version
+        return optimizeImage(profileImage, { quality: 80, width: 400 });
+      })
+      .then(highQualitySrc => {
+        setOptimizedProfileImage(highQualitySrc);
+      })
+      .catch(() => {
+        // Fallback to original on error
+        setOptimizedProfileImage(profileImage);
+      });
+  }, []);
 
   const scrollToAbout = () => {
     if (aboutRef.current) {
@@ -84,7 +105,7 @@ const Home = ({ language }) => {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-600/20 animate-pulse"></div>
 
               <img
-                src={profileImage}
+                src={optimizedProfileImage || profileImage}
                 alt="Mohamed Haroun"
                 className="w-full h-full object-cover relative z-10"
                 loading="eager"
@@ -104,7 +125,7 @@ const Home = ({ language }) => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.7, delay: 1.0 }}
-                className="text-4xl sm:text-6xl font-bold mt-2 text-gradient"
+                className="text-3xl sm:text-5xl font-bold mt-2 text-gradient leading-tight"
               >
                 {t.name}
               </motion.h1>
@@ -112,7 +133,7 @@ const Home = ({ language }) => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
-                className="text-xl sm:text-2xl font-medium mt-2 text-gray-200"
+                className="text-lg sm:text-xl font-medium mt-4 text-gray-200 leading-relaxed"
               >
                 {t.title}
               </motion.h3>

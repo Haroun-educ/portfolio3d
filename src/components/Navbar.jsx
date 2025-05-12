@@ -106,9 +106,9 @@ const Navbar = ({ darkMode, setDarkMode, language, setLanguage }) => {
             >
               {activeSection === 'home' && (
                 <motion.span
-                  className="absolute inset-0 bg-gray-800/50 rounded-lg -z-10"
+                  className="absolute inset-0 bg-gray-800/50 border border-blue-500/20 rounded-lg -z-10"
                   layoutId="navHighlight"
-                  transition={{ type: 'spring', duration: 0.6 }}
+                  transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
                 />
               )}
               {t.home}
@@ -127,9 +127,9 @@ const Navbar = ({ darkMode, setDarkMode, language, setLanguage }) => {
             >
               {activeSection === 'about' && (
                 <motion.span
-                  className="absolute inset-0 bg-gray-800/50 rounded-lg -z-10"
+                  className="absolute inset-0 bg-gray-800/50 border border-blue-500/20 rounded-lg -z-10"
                   layoutId="navHighlight"
-                  transition={{ type: 'spring', duration: 0.6 }}
+                  transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
                 />
               )}
               {t.about}
@@ -148,9 +148,9 @@ const Navbar = ({ darkMode, setDarkMode, language, setLanguage }) => {
             >
               {activeSection === 'skills' && (
                 <motion.span
-                  className="absolute inset-0 bg-gray-800/50 rounded-lg -z-10"
+                  className="absolute inset-0 bg-gray-800/50 border border-blue-500/20 rounded-lg -z-10"
                   layoutId="navHighlight"
-                  transition={{ type: 'spring', duration: 0.6 }}
+                  transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
                 />
               )}
               {t.skills}
@@ -169,9 +169,9 @@ const Navbar = ({ darkMode, setDarkMode, language, setLanguage }) => {
             >
               {activeSection === 'projects' && (
                 <motion.span
-                  className="absolute inset-0 bg-gray-800/50 rounded-lg -z-10"
+                  className="absolute inset-0 bg-gray-800/50 border border-blue-500/20 rounded-lg -z-10"
                   layoutId="navHighlight"
-                  transition={{ type: 'spring', duration: 0.6 }}
+                  transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
                 />
               )}
               {t.projects}
@@ -190,9 +190,9 @@ const Navbar = ({ darkMode, setDarkMode, language, setLanguage }) => {
             >
               {activeSection === 'achievements' && (
                 <motion.span
-                  className="absolute inset-0 bg-gray-800/50 rounded-lg -z-10"
+                  className="absolute inset-0 bg-gray-800/50 border border-blue-500/20 rounded-lg -z-10"
                   layoutId="navHighlight"
-                  transition={{ type: 'spring', duration: 0.6 }}
+                  transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
                 />
               )}
               {t.achievements}
@@ -211,9 +211,9 @@ const Navbar = ({ darkMode, setDarkMode, language, setLanguage }) => {
             >
               {activeSection === 'contact' && (
                 <motion.span
-                  className="absolute inset-0 bg-gray-800/50 rounded-lg -z-10"
+                  className="absolute inset-0 bg-gray-800/50 border border-blue-500/20 rounded-lg -z-10"
                   layoutId="navHighlight"
-                  transition={{ type: 'spring', duration: 0.6 }}
+                  transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
                 />
               )}
               {t.contact}

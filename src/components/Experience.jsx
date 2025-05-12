@@ -4,51 +4,110 @@ import { OrbitControls, Preload, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { optimizeThreeJsPerformance } from '../utils/performance';
 
-const SimpleBox = () => {
+const FloatingSphere = () => {
   // Use refs for better performance
-  const meshRef = useRef();
+  const groupRef = useRef();
+  const sphereRef = useRef();
   const lightRef = useRef();
 
   // Optimize animations with useFrame
   useFrame(({ clock }) => {
-    if (meshRef.current) {
-      // Smooth rotation animation
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.3;
-      meshRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.2) * 0.2;
+    if (groupRef.current) {
+      // Gentle floating animation
+      groupRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.3;
+      groupRef.current.rotation.y = clock.getElapsedTime() * 0.2;
+    }
+
+    if (sphereRef.current) {
+      // Subtle pulsing effect
+      const scale = 1 + Math.sin(clock.getElapsedTime() * 0.8) * 0.05;
+      sphereRef.current.scale.set(scale, scale, scale);
     }
   });
 
-  // Memoize geometry and material for better performance
-  const boxGeometry = useMemo(() => new THREE.BoxGeometry(2, 2, 2), []);
-  const boxMaterial = useMemo(() => new THREE.MeshStandardMaterial({
-    color: "#4169e1",
-    roughness: 0.5,
-    metalness: 0.2
+  // Memoize geometries and materials for better performance
+  const sphereGeometry = useMemo(() => new THREE.SphereGeometry(1.2, 32, 32), []);
+  const sphereMaterial = useMemo(() => new THREE.MeshStandardMaterial({
+    color: "#3b82f6",
+    roughness: 0.2,
+    metalness: 0.8,
+    envMapIntensity: 0.8
+  }), []);
+
+  const ringGeometry = useMemo(() => new THREE.TorusGeometry(2, 0.15, 16, 100), []);
+  const ringMaterial = useMemo(() => new THREE.MeshStandardMaterial({
+    color: "#8b5cf6",
+    roughness: 0.3,
+    metalness: 0.6,
+    transparent: true,
+    opacity: 0.7
   }), []);
 
   return (
     <mesh>
+      <ambientLight intensity={0.2} />
       <hemisphereLight intensity={0.15} groundColor="black" />
       <spotLight
         ref={lightRef}
         position={[-20, 50, 10]}
         angle={0.12}
         penumbra={1}
-        intensity={1}
+        intensity={0.8}
         castShadow
-        shadow-mapSize={256} // Further reduced for performance
+        shadow-mapSize={256} // Reduced for performance
       />
-      <pointLight intensity={0.8} position={[0, 5, 5]} />
+      <pointLight intensity={0.6} position={[5, 5, 5]} color="#3b82f6" />
+      <pointLight intensity={0.4} position={[-5, -5, 5]} color="#8b5cf6" />
 
-      {/* Simple 3D box */}
-      <group position={[0, 0, 0]}>
+      {/* Floating 3D elements */}
+      <group ref={groupRef} position={[0, 0, 0]}>
+        {/* Main sphere */}
         <mesh
-          ref={meshRef}
+          ref={sphereRef}
           receiveShadow
           castShadow
-          geometry={boxGeometry}
-          material={boxMaterial}
+          geometry={sphereGeometry}
+          material={sphereMaterial}
         />
+
+        {/* Decorative ring */}
+        <mesh
+          receiveShadow
+          castShadow
+          geometry={ringGeometry}
+          material={ringMaterial}
+          rotation={[Math.PI / 2, 0, 0]}
+        />
+
+        {/* Second decorative ring */}
+        <mesh
+          receiveShadow
+          castShadow
+          geometry={ringGeometry}
+          material={ringMaterial}
+          rotation={[Math.PI / 4, Math.PI / 4, 0]}
+          scale={0.8}
+        />
+
+        {/* Particles effect */}
+        {Array.from({ length: 20 }).map((_, i) => (
+          <mesh
+            key={i}
+            position={[
+              (Math.random() - 0.5) * 5,
+              (Math.random() - 0.5) * 5,
+              (Math.random() - 0.5) * 5
+            ]}
+            scale={0.05 + Math.random() * 0.05}
+          >
+            <sphereGeometry args={[1, 8, 8]} />
+            <meshStandardMaterial
+              color={Math.random() > 0.5 ? "#3b82f6" : "#8b5cf6"}
+              emissive={Math.random() > 0.5 ? "#3b82f6" : "#8b5cf6"}
+              emissiveIntensity={0.5}
+            />
+          </mesh>
+        ))}
       </group>
     </mesh>
   );
@@ -154,14 +213,14 @@ const Experience = () => {
             <OrbitControls
               enableZoom={false}
               autoRotate
-              autoRotateSpeed={0.5}
+              autoRotateSpeed={0.3}
               enableDamping
               dampingFactor={0.05}
               rotateSpeed={0.5}
               maxPolarAngle={Math.PI / 2}
               minPolarAngle={Math.PI / 4}
             />
-            <SimpleBox />
+            <FloatingSphere />
             <Preload all />
           </Suspense>
         </Renderer>

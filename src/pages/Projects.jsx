@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { debounce } from '../utils/performance';
+import { debounce, optimizeImage } from '../utils/performance';
 
 // Language content
 const content = {
@@ -81,6 +81,31 @@ const projectsData = [
 
 const ProjectCard = ({ project, t }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [optimizedImageSrc, setOptimizedImageSrc] = useState('');
+  const [isOptimizing, setIsOptimizing] = useState(true);
+
+  // Optimize image on component mount
+  useEffect(() => {
+    const fullImagePath = import.meta.env.BASE_URL + project.image;
+
+    // First load a low quality version for quick display
+    optimizeImage(fullImagePath, { quality: 30, width: 400, blur: true })
+      .then(lowQualitySrc => {
+        setOptimizedImageSrc(lowQualitySrc);
+
+        // Then load the higher quality version
+        return optimizeImage(fullImagePath, { quality: 70, width: 800 });
+      })
+      .then(highQualitySrc => {
+        setOptimizedImageSrc(highQualitySrc);
+        setIsOptimizing(false);
+      })
+      .catch(() => {
+        // Fallback to original image on error
+        setOptimizedImageSrc(fullImagePath);
+        setIsOptimizing(false);
+      });
+  }, [project.image]);
 
   // Handle image load event
   const handleImageLoad = (e) => {
@@ -91,10 +116,10 @@ const ProjectCard = ({ project, t }) => {
   // Use effect to simulate loading for images that might be cached
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (!imageLoaded) setImageLoaded(true);
+      if (!imageLoaded && !isOptimizing) setImageLoaded(true);
     }, 1000);
     return () => clearTimeout(timer);
-  }, [imageLoaded]);
+  }, [imageLoaded, isOptimizing]);
 
   return (
     <motion.div
@@ -111,7 +136,7 @@ const ProjectCard = ({ project, t }) => {
             </div>
           )}
           <img
-            src={import.meta.env.BASE_URL + project.image}
+            src={optimizedImageSrc || (import.meta.env.BASE_URL + project.image)}
             alt={project.title}
             loading="lazy"
             decoding="async"
