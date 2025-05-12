@@ -2,14 +2,23 @@
 
 A professional and modern 3D portfolio website that showcases skills in programming, software engineering, artificial intelligence, and robotics. This interactive experience combines attractive design with expressive, personal content.
 
+![Portfolio Preview](public/images/project1-min.jpg)
+
+## Live Demo
+
+Visit the live website: [https://haroun-educ.github.io/portfolio3d/](https://haroun-educ.github.io/portfolio3d/)
+
 ## Features
 
-- **Interactive 3D Elements**: Engaging 3D models and animations using Three.js
-- **Modern Design**: Clean and professional UI with Tailwind CSS
+- **Interactive 3D Elements**: Engaging 3D planet model with dynamic animations using Three.js
+- **Modern Design**: Clean and professional UI with Tailwind CSS and glass-effect components
 - **Smooth Animations**: Fluid transitions and effects with Framer Motion
 - **Responsive Layout**: Optimized for all devices from mobile to desktop
-- **Dark Mode**: Toggle between light and dark themes
-- **Bilingual Support**: Switch between English and French
+- **Dark Mode**: Toggle between light and dark themes with preference saving
+- **Bilingual Support**: Switch between English and French with preference saving
+- **SEO Optimized**: Enhanced meta tags and Open Graph support for better search visibility
+- **Performance Optimized**: Improved loading times and rendering performance
+- **Functional Contact Form**: Working contact form with validation and feedback
 - **Downloadable Resume**: Option to view and download CV in PDF format
 
 ## Tech Stack
@@ -77,6 +86,27 @@ The project is configured to deploy automatically to GitHub Pages using GitHub A
 
 ## Performance Optimization
 
+### Recent Improvements
+The portfolio has been optimized with several performance enhancements:
+
+1. **SEO Optimization**
+   - Added comprehensive meta tags for better search engine visibility
+   - Implemented Open Graph tags for improved social media sharing
+   - Added Twitter Card support
+   - Included canonical URL to prevent duplicate content issues
+
+2. **Performance Enhancements**
+   - Optimized image loading with proper sizing and compression
+   - Improved 3D model rendering with optimized geometries and materials
+   - Added loading states and skeleton screens for better perceived performance
+   - Implemented debounce functions for performance-intensive operations
+
+3. **User Experience Improvements**
+   - Added preference saving for dark mode and language settings
+   - Enhanced navigation with smooth scrolling and URL hash updates
+   - Improved form validation and feedback for the contact form
+   - Added glass-effect UI components for a modern look
+
 ### Image Optimization
 For better performance, especially on mobile devices:
 
@@ -92,12 +122,36 @@ For better performance, especially on mobile devices:
 ### 3D Performance
 The 3D elements can be resource-intensive on mobile devices:
 
-1. The site automatically disables 3D on mobile devices
+1. The site automatically shows a simplified version on mobile devices
 2. For further optimization, you can:
    - Reduce polygon count in 3D models
    - Use simpler materials
    - Implement level-of-detail (LOD) for complex scenes
 
+3. Current optimizations include:
+   - Memory-efficient rendering with useRef and useMemo hooks
+   - Optimized lighting and shadows
+   - Reduced geometry complexity for better mobile performance
+
+## Screenshots
+
+### Home Page with 3D Planet
+![Home Page](public/images/project1-min.jpg)
+
+### Projects Section
+![Projects Section](public/images/project2-min.jpg)
+
+### Skills Section
+![Skills Section](public/images/project3-min.jpg)
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Author
+
+**Mohamed Haroun Kaida** - Student & Technology Enthusiast
+
+- GitHub: [Haroun-educ](https://github.com/Haroun-educ)
+- LinkedIn: [Mohamed Haroun Kaida](https://www.linkedin.com/in/haroun-educ/)
+- Linktree: [Harouneduc](https://linktr.ee/Harouneduc)
