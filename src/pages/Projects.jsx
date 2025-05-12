@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { debounce, optimizeImage } from '../utils/performance';
+import { debounce } from '../utils/performance';
 
 // Language content
 const content = {
@@ -35,7 +35,7 @@ const projectsData = [
   {
     title: "3D Portfolio Website",
     description: "A creative and interactive portfolio website built with React, Three.js, and Tailwind CSS to showcase my skills and projects.",
-    image: "/assets/images/project1.jpg",
+    image: "/assets/images/project1-min.jpg",
     tags: ["React", "Three.js", "Tailwind CSS"],
     category: "web",
     source_code_link: "https://github.com/Haroun-educ/portfolio",
@@ -44,7 +44,7 @@ const projectsData = [
   {
     title: "Simple Calculator",
     description: "A basic calculator application built with Python that can perform arithmetic operations.",
-    image: "/assets/images/project2.jpg",
+    image: "/assets/images/project2-min.jpg",
     tags: ["Python", "Tkinter"],
     category: "web",
     source_code_link: null,
@@ -53,7 +53,7 @@ const projectsData = [
   {
     title: "Snake Game",
     description: "A classic Snake game implemented in Python where the player controls a snake to eat food and grow without hitting walls or itself.",
-    image: "/assets/images/project3.jpg",
+    image: "/assets/images/project3-min.jpg",
     tags: ["Python", "Pygame"],
     category: "web",
     source_code_link: null,
@@ -62,7 +62,7 @@ const projectsData = [
   {
     title: "Smart City System",
     description: "A planned future project to develop a modular system for smart cities, integrating IoT devices, data analytics, and user interfaces.",
-    image: "/assets/images/project4.jpg",
+    image: "/assets/images/project4-min.jpg",
     tags: ["IoT", "Python", "Web Development"],
     category: "robotics",
     source_code_link: null,
@@ -71,7 +71,7 @@ const projectsData = [
   {
     title: "Line Following Robot",
     description: "A robotics project where a small robot follows a line on the ground using sensors and microcontrollers.",
-    image: "/assets/images/project1.jpg",
+    image: "/assets/images/project1-min.jpg",
     tags: ["Arduino", "Robotics", "C++"],
     category: "robotics",
     source_code_link: null,
@@ -84,27 +84,17 @@ const ProjectCard = ({ project, t }) => {
   const [optimizedImageSrc, setOptimizedImageSrc] = useState('');
   const [isOptimizing, setIsOptimizing] = useState(true);
 
-  // Optimize image on component mount
+  // Set image path directly
   useEffect(() => {
     const fullImagePath = import.meta.env.BASE_URL + project.image;
+    setOptimizedImageSrc(fullImagePath);
 
-    // First load a low quality version for quick display
-    optimizeImage(fullImagePath, { quality: 30, width: 400, blur: true })
-      .then(lowQualitySrc => {
-        setOptimizedImageSrc(lowQualitySrc);
+    // Set loading state to false after a short delay
+    const timer = setTimeout(() => {
+      setIsOptimizing(false);
+    }, 300);
 
-        // Then load the higher quality version
-        return optimizeImage(fullImagePath, { quality: 70, width: 800 });
-      })
-      .then(highQualitySrc => {
-        setOptimizedImageSrc(highQualitySrc);
-        setIsOptimizing(false);
-      })
-      .catch(() => {
-        // Fallback to original image on error
-        setOptimizedImageSrc(fullImagePath);
-        setIsOptimizing(false);
-      });
+    return () => clearTimeout(timer);
   }, [project.image]);
 
   // Handle image load event

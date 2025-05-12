@@ -4,49 +4,122 @@ import { OrbitControls, Preload, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { optimizeThreeJsPerformance } from '../utils/performance';
 
-const FloatingSphere = () => {
+const FloatingPlanet = () => {
   // Use refs for better performance
   const groupRef = useRef();
-  const sphereRef = useRef();
+  const planetRef = useRef();
+  const ringRef = useRef();
+  const ring2Ref = useRef();
+  const particlesRef = useRef();
   const lightRef = useRef();
 
   // Optimize animations with useFrame
   useFrame(({ clock }) => {
+    const elapsedTime = clock.getElapsedTime();
+
     if (groupRef.current) {
       // Gentle floating animation
-      groupRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.3;
-      groupRef.current.rotation.y = clock.getElapsedTime() * 0.2;
+      groupRef.current.position.y = Math.sin(elapsedTime * 0.3) * 0.3;
+      groupRef.current.rotation.y = elapsedTime * 0.15;
     }
 
-    if (sphereRef.current) {
+    if (planetRef.current) {
+      // Planet rotation
+      planetRef.current.rotation.y = elapsedTime * 0.2;
+
       // Subtle pulsing effect
-      const scale = 1 + Math.sin(clock.getElapsedTime() * 0.8) * 0.05;
-      sphereRef.current.scale.set(scale, scale, scale);
+      const scale = 1 + Math.sin(elapsedTime * 0.5) * 0.03;
+      planetRef.current.scale.set(scale, scale, scale);
+    }
+
+    if (ringRef.current) {
+      // Independent ring rotation
+      ringRef.current.rotation.z = elapsedTime * 0.1;
+    }
+
+    if (ring2Ref.current) {
+      // Second ring rotation in opposite direction
+      ring2Ref.current.rotation.z = -elapsedTime * 0.15;
+    }
+
+    if (particlesRef.current) {
+      // Rotate particles around the planet
+      particlesRef.current.rotation.y = elapsedTime * 0.05;
+      particlesRef.current.rotation.x = Math.sin(elapsedTime * 0.2) * 0.2;
     }
   });
 
-  // Memoize geometries and materials for better performance
-  const sphereGeometry = useMemo(() => new THREE.SphereGeometry(1.2, 32, 32), []);
-  const sphereMaterial = useMemo(() => new THREE.MeshStandardMaterial({
-    color: "#3b82f6",
-    roughness: 0.2,
-    metalness: 0.8,
-    envMapIntensity: 0.8
-  }), []);
+  // Create a custom shader material for the planet
+  const planetMaterial = useMemo(() => {
+    return new THREE.MeshStandardMaterial({
+      color: "#3b82f6",
+      roughness: 0.2,
+      metalness: 0.8,
+      envMapIntensity: 1.0,
+      emissive: "#1e40af",
+      emissiveIntensity: 0.2
+    });
+  }, []);
 
-  const ringGeometry = useMemo(() => new THREE.TorusGeometry(2, 0.15, 16, 100), []);
-  const ringMaterial = useMemo(() => new THREE.MeshStandardMaterial({
-    color: "#8b5cf6",
-    roughness: 0.3,
-    metalness: 0.6,
-    transparent: true,
-    opacity: 0.7
-  }), []);
+  // Create a custom shader material for the rings
+  const ringMaterial = useMemo(() => {
+    return new THREE.MeshStandardMaterial({
+      color: "#8b5cf6",
+      roughness: 0.3,
+      metalness: 0.7,
+      transparent: true,
+      opacity: 0.7,
+      side: THREE.DoubleSide
+    });
+  }, []);
+
+  // Create a custom shader material for the atmosphere
+  const atmosphereMaterial = useMemo(() => {
+    return new THREE.MeshStandardMaterial({
+      color: "#60a5fa",
+      transparent: true,
+      opacity: 0.3,
+      side: THREE.BackSide
+    });
+  }, []);
+
+  // Memoize geometries for better performance
+  const planetGeometry = useMemo(() => new THREE.SphereGeometry(1.2, 64, 64), []);
+  const atmosphereGeometry = useMemo(() => new THREE.SphereGeometry(1.5, 64, 64), []);
+  const ringGeometry = useMemo(() => new THREE.TorusGeometry(2, 0.15, 32, 100), []);
+  const smallRingGeometry = useMemo(() => new THREE.TorusGeometry(2.5, 0.08, 16, 100), []);
+
+  // Generate random stars positions
+  const starPositions = useMemo(() => {
+    return Array.from({ length: 100 }).map(() => [
+      (Math.random() - 0.5) * 20,
+      (Math.random() - 0.5) * 20,
+      (Math.random() - 0.5) * 20
+    ]);
+  }, []);
+
+  // Generate random orbital particles
+  const orbitalParticles = useMemo(() => {
+    return Array.from({ length: 30 }).map((_, i) => {
+      const angle = (i / 30) * Math.PI * 2;
+      const radius = 3 + Math.random() * 0.5;
+      return {
+        position: [
+          Math.cos(angle) * radius,
+          (Math.random() - 0.5) * 0.5,
+          Math.sin(angle) * radius
+        ],
+        scale: 0.03 + Math.random() * 0.04,
+        color: Math.random() > 0.7 ? "#f472b6" : (Math.random() > 0.5 ? "#3b82f6" : "#8b5cf6")
+      };
+    });
+  }, []);
 
   return (
     <mesh>
+      {/* Lighting */}
       <ambientLight intensity={0.2} />
-      <hemisphereLight intensity={0.15} groundColor="black" />
+      <hemisphereLight intensity={0.2} groundColor="#000033" />
       <spotLight
         ref={lightRef}
         position={[-20, 50, 10]}
@@ -56,22 +129,30 @@ const FloatingSphere = () => {
         castShadow
         shadow-mapSize={256} // Reduced for performance
       />
-      <pointLight intensity={0.6} position={[5, 5, 5]} color="#3b82f6" />
-      <pointLight intensity={0.4} position={[-5, -5, 5]} color="#8b5cf6" />
+      <pointLight intensity={0.8} position={[5, 5, 5]} color="#3b82f6" />
+      <pointLight intensity={0.5} position={[-5, -5, 5]} color="#8b5cf6" />
+      <pointLight intensity={0.3} position={[0, 0, 5]} color="#f472b6" />
 
-      {/* Floating 3D elements */}
+      {/* Main group that floats */}
       <group ref={groupRef} position={[0, 0, 0]}>
-        {/* Main sphere */}
+        {/* Planet with atmosphere */}
         <mesh
-          ref={sphereRef}
+          ref={planetRef}
           receiveShadow
           castShadow
-          geometry={sphereGeometry}
-          material={sphereMaterial}
-        />
+          geometry={planetGeometry}
+          material={planetMaterial}
+        >
+          {/* Atmosphere layer */}
+          <mesh
+            geometry={atmosphereGeometry}
+            material={atmosphereMaterial}
+          />
+        </mesh>
 
-        {/* Decorative ring */}
+        {/* Main decorative ring */}
         <mesh
+          ref={ringRef}
           receiveShadow
           castShadow
           geometry={ringGeometry}
@@ -81,34 +162,49 @@ const FloatingSphere = () => {
 
         {/* Second decorative ring */}
         <mesh
+          ref={ring2Ref}
           receiveShadow
           castShadow
-          geometry={ringGeometry}
+          geometry={smallRingGeometry}
           material={ringMaterial}
-          rotation={[Math.PI / 4, Math.PI / 4, 0]}
-          scale={0.8}
+          rotation={[Math.PI / 3, Math.PI / 6, 0]}
+          scale={1.1}
         />
 
-        {/* Particles effect */}
-        {Array.from({ length: 20 }).map((_, i) => (
-          <mesh
-            key={i}
-            position={[
-              (Math.random() - 0.5) * 5,
-              (Math.random() - 0.5) * 5,
-              (Math.random() - 0.5) * 5
-            ]}
-            scale={0.05 + Math.random() * 0.05}
-          >
-            <sphereGeometry args={[1, 8, 8]} />
-            <meshStandardMaterial
-              color={Math.random() > 0.5 ? "#3b82f6" : "#8b5cf6"}
-              emissive={Math.random() > 0.5 ? "#3b82f6" : "#8b5cf6"}
-              emissiveIntensity={0.5}
-            />
-          </mesh>
-        ))}
+        {/* Orbital particles */}
+        <group ref={particlesRef}>
+          {orbitalParticles.map((particle, i) => (
+            <mesh
+              key={i}
+              position={particle.position}
+              scale={particle.scale}
+            >
+              <sphereGeometry args={[1, 16, 16]} />
+              <meshStandardMaterial
+                color={particle.color}
+                emissive={particle.color}
+                emissiveIntensity={0.8}
+              />
+            </mesh>
+          ))}
+        </group>
       </group>
+
+      {/* Background stars */}
+      {starPositions.map((position, i) => (
+        <mesh
+          key={i}
+          position={position}
+          scale={0.02 + Math.random() * 0.03}
+        >
+          <sphereGeometry args={[1, 8, 8]} />
+          <meshBasicMaterial
+            color={Math.random() > 0.9 ? "#f472b6" : (Math.random() > 0.6 ? "#3b82f6" : "#ffffff")}
+            transparent
+            opacity={0.8 + Math.random() * 0.2}
+          />
+        </mesh>
+      ))}
     </mesh>
   );
 };
@@ -220,7 +316,7 @@ const Experience = () => {
               maxPolarAngle={Math.PI / 2}
               minPolarAngle={Math.PI / 4}
             />
-            <FloatingSphere />
+            <FloatingPlanet />
             <Preload all />
           </Suspense>
         </Renderer>

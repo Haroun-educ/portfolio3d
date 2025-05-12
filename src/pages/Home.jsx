@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import Experience from '../components/Experience';
 import profileImage from '../assets/images/profile.jpg';
-import { optimizeImage } from '../utils/performance';
 
 // Import page components
 import About from './About';
@@ -45,26 +44,6 @@ const Home = ({ language }) => {
   // Text content based on selected language
   const t = content[language];
   const aboutRef = useRef(null);
-  const [optimizedProfileImage, setOptimizedProfileImage] = useState('');
-
-  // Optimize profile image on component mount
-  useEffect(() => {
-    // First load a low quality version
-    optimizeImage(profileImage, { quality: 40, width: 200, blur: true })
-      .then(lowQualitySrc => {
-        setOptimizedProfileImage(lowQualitySrc);
-
-        // Then load the higher quality version
-        return optimizeImage(profileImage, { quality: 80, width: 400 });
-      })
-      .then(highQualitySrc => {
-        setOptimizedProfileImage(highQualitySrc);
-      })
-      .catch(() => {
-        // Fallback to original on error
-        setOptimizedProfileImage(profileImage);
-      });
-  }, []);
 
   const scrollToAbout = () => {
     if (aboutRef.current) {
@@ -105,7 +84,7 @@ const Home = ({ language }) => {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-600/20 animate-pulse"></div>
 
               <img
-                src={optimizedProfileImage || profileImage}
+                src={profileImage}
                 alt="Mohamed Haroun"
                 className="w-full h-full object-cover relative z-10"
                 loading="eager"
