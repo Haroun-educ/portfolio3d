@@ -8,6 +8,13 @@ A professional and modern 3D portfolio website that showcases skills in programm
 
 Visit the live website: [https://haroun-educ.github.io/portfolio3d/](https://haroun-educ.github.io/portfolio3d/)
 
+## 📅 Project Timeline
+
+- **Idea Date**: 13 January 2025 *(initial project concept)*  
+- **First Commit**: 27 April 2025  
+- **Latest Public Updates**: 12 May 2025  
+- **Ongoing**: Minor improvements and optimizations are added from time to time
+
 ## Features
 
 - **Interactive 3D Elements**: Engaging 3D planet model with dynamic animations using Three.js
