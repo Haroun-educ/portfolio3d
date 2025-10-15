@@ -8,6 +8,13 @@ A professional and modern 3D portfolio website that showcases skills in programm
 
 Visit the live website: [https://haroun-educ.github.io/portfolio3d/](https://haroun-educ.github.io/portfolio3d/)
 
+## 📅 Project Timeline
+
+- **Idea Date**: 13 January 2025 *(initial project concept)*  
+- **First Commit**: 27 April 2025  
+- **Latest Public Updates**: 12 May 2025  
+- **Ongoing**: Minor improvements and optimizations are added from time to time
+
 ## Features
 
 - **Interactive 3D Elements**: Engaging 3D planet model with dynamic animations using Three.js
@@ -46,26 +53,6 @@ Visit the live website: [https://haroun-educ.github.io/portfolio3d/](https://har
 
 - Node.js (v14 or higher)
 - npm or yarn
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Haroun-educ/portfolio3d.git
-   cd portfolio
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open your browser and visit `http://localhost:5173`
 
 ### Building for Production
 
