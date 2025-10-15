@@ -10,9 +10,9 @@ Visit the live website: [https://haroun-educ.github.io/portfolio3d/](https://har
 
 ## 📅 Project Timeline
 
-- **Idea Date**: 13 January 2025 *(initial project concept)*  
-- **First Commit**: 27 April 2025  
-- **Latest Public Updates**: 12 May 2025  
+- **Idea Date**: `13 January 2025`  
+- **First Commit**: `27 April 2025`  
+- **Latest Public Updates**: `12 May 2025`  
 - **Ongoing**: Minor improvements and optimizations are added from time to time
 
 ## Features
