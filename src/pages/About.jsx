@@ -8,7 +8,7 @@ const content = {
     subtitle: "My Introduction",
     description: [
       "I am a Moroccan student passionate about digital technologies — a true digital native who grew up with computers, smartphones, and the internet. Curious, creative, and analytical, I have a strong passion for problem-solving and innovation.",
-      "My current goal is to join an engineering school like EST to build a solid foundation in computer science, then continue my studies at a prestigious engineering institution such as INPT, and eventually pursue an international academic path in Germany or the United States.",
+      "I am currently studying at the École Supérieure de Technologie (EST) in Dakhla, where I am building a strong foundation in computer science and engineering. This academic path allows me to strengthen my technical skills and prepare for future opportunities in the field. then continue my studies at a prestigious engineering institution such as INPT, and eventually pursue an international academic path in Germany or the United States.",
       "When I'm not studying, you can find me working on programming projects, participating in robotics competitions, or exploring the latest advancements in technology. I believe in continuous learning and am always looking for new challenges to expand my skills."
     ],
     education: "Education",
@@ -58,7 +58,7 @@ const content = {
     subtitle: "Mon Introduction",
     description: [
       "Je suis un étudiant marocain passionné par les technologies numériques — un véritable natif du numérique qui a grandi avec les ordinateurs, les smartphones et Internet. Curieux, créatif et analytique, j'ai une forte passion pour la résolution de problèmes et l'innovation.",
-      "Mon objectif actuel est d'intégrer une école d'ingénieurs comme l'EST pour construire une base solide en informatique, puis de poursuivre mes études dans une institution d'ingénierie prestigieuse comme l'INPT, et éventuellement suivre un parcours académique international en Allemagne ou aux États-Unis.",
+      "Je poursuis actuellement mes étude à l'école Supérieure de Technologie (EST) de Dakhla, où je construis une solide base en informatique . Ce parcours académique me permet de renforcer mes compétences technique et de me préparer à de futures opportunités dans le domaine. puis de poursuivre mes études dans une institution d'ingénierie prestigieuse comme l'INPT, et éventuellement suivre un parcours académique international en Allemagne ou aux États-Unis.",
       "Quand je n'étudie pas, vous pouvez me trouver en train de travailler sur des projets de programmation, de participer à des compétitions de robotique, ou d'explorer les dernières avancées technologiques. Je crois en l'apprentissage continu et je suis toujours à la recherche de nouveaux défis pour développer mes compétences."
     ],
     education: "Éducation",
