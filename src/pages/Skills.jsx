@@ -5,40 +5,61 @@ const content = {
   en: {
     title: "My Skills",
     subtitle: "Technical Expertise",
-    programmingLanguages: "Programming Languages",
-    frameworks: "Frameworks & Libraries",
-    tools: "Tools & Technologies",
+    programming: "Programming",
+    webDev: "Web Development",
+    databases: "Databases & Modeling",
+    networking: "Networking",
+    tools: "Tools & Platforms",
+    design: "Design",
     other: "Other Skills"
   },
   fr: {
     title: "Mes Compétences",
     subtitle: "Expertise Technique",
-    programmingLanguages: "Langages de Programmation",
-    frameworks: "Frameworks & Bibliothèques",
-    tools: "Outils & Technologies",
+    programming: "Programmation",
+    webDev: "Développement Web",
+    databases: "Bases de Données & Modélisation",
+    networking: "Réseaux",
+    tools: "Outils & Plateformes",
+    design: "Design",
     other: "Autres Compétences"
   }
 };
 
 // Skill data
 const skills = {
-  programmingLanguages: [
+  programming: [
+    { name: "C (data structures, linked lists)", level: 55 },
     { name: "Python", level: 50 },
-    { name: "C", level: 40 },
-    { name: "C#", level: 35 },
-    { name: "Scratch", level: 80 },
-    { name: "HTML/CSS", level: 40 }
+    { name: "C# (basics)", level: 30 },
+    { name: "Scratch", level: 80 }
   ],
-  frameworks: [
+  webDev: [
+    { name: "HTML5", level: 65 },
+    { name: "CSS3 (responsive, flexbox, media queries)", level: 60 },
+    { name: "JavaScript", level: 45 },
     { name: "React", level: 25 },
     { name: "Three.js", level: 20 },
     { name: "Tailwind CSS", level: 25 }
   ],
+  databases: [
+    { name: "SQL", level: 45 },
+    { name: "NoSQL", level: 30 },
+    { name: "UML Modeling", level: 40 }
+  ],
+  networking: [
+    { name: "Cisco Packet Tracer", level: 40 },
+    { name: "OSI Model", level: 50 },
+    { name: "Network Protocols", level: 40 }
+  ],
   tools: [
-    { name: "Visual Studio Code", level: 75 },
-    { name: "Git & GitHub", level: 60 },
+    { name: "VS Code", level: 75 },
+    { name: "GitHub", level: 60 },
     { name: "Replit", level: 70 },
     { name: "Notion", level: 35 },
+    { name: "Vite", level: 40 }
+  ],
+  design: [
     { name: "Adobe Photoshop", level: 50 },
     { name: "Illustrator", level: 40 },
     { name: "Canva", level: 85 }
@@ -48,8 +69,7 @@ const skills = {
     { name: "Teamwork", level: 85 },
     { name: "Adaptability", level: 75 },
     { name: "Quick Learning", level: 85 },
-    { name: "Effective Communication", level: 75 },
-    { name: "Working with Open-minded People", level: 80 }
+    { name: "Effective Communication", level: 75 }
   ]
 };
 
@@ -98,27 +118,14 @@ const Skills = ({ language }) => {
     <div className="w-full">
       <div className="max-w-7xl mx-auto">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <SkillCategory
-            title={t.programmingLanguages}
-            skills={skills.programmingLanguages}
-            delay={0.2}
-          />
-          <SkillCategory
-            title={t.frameworks}
-            skills={skills.frameworks}
-            delay={0.4}
-          />
-          <SkillCategory
-            title={t.tools}
-            skills={skills.tools}
-            delay={0.6}
-          />
-          <SkillCategory
-            title={t.other}
-            skills={skills.other}
-            delay={0.8}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <SkillCategory title={t.programming} skills={skills.programming} delay={0.1} />
+          <SkillCategory title={t.webDev} skills={skills.webDev} delay={0.2} />
+          <SkillCategory title={t.databases} skills={skills.databases} delay={0.3} />
+          <SkillCategory title={t.networking} skills={skills.networking} delay={0.4} />
+          <SkillCategory title={t.tools} skills={skills.tools} delay={0.5} />
+          <SkillCategory title={t.design} skills={skills.design} delay={0.6} />
+          <SkillCategory title={t.other} skills={skills.other} delay={0.7} />
         </div>
       </div>
     </div>

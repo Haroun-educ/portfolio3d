@@ -5,6 +5,7 @@ const content = {
   en: {
     title: "Achievements",
     subtitle: "My Accomplishments",
+    academic: "Academic",
     competitions: "Competitions",
     certifications: "Certifications",
     awards: "Awards & Recognition"
@@ -12,6 +13,7 @@ const content = {
   fr: {
     title: "Réalisations",
     subtitle: "Mes Accomplissements",
+    academic: "Académique",
     competitions: "Compétitions",
     certifications: "Certifications",
     awards: "Prix & Reconnaissances"
@@ -20,6 +22,20 @@ const content = {
 
 // Achievement data
 const achievements = {
+  academic: [
+    {
+      title: "Enrolled in DUT Software Design and Development (CDL)",
+      organization: "EST Dakhla",
+      date: "2025 – 2026",
+      description: "Accepted into the DUT CDL program at the École Supérieure de Technologie in Dakhla, studying software engineering, databases, networks, and web development."
+    },
+    {
+      title: "Obtained Baccalauréat in Physical Sciences (French Track)",
+      organization: "High School",
+      date: "2025",
+      description: "Successfully obtained the Baccalauréat in Physical Sciences, French track, qualifying for higher education in engineering and technology fields."
+    }
+  ],
   competitions: [
     {
       title: "1st Place at Regional Robotics Competition",
@@ -100,21 +116,27 @@ const Achievements = ({ language }) => {
       <div className="max-w-7xl mx-auto">
 
         <AchievementSection
+          title={t.academic}
+          items={achievements.academic}
+          delay={0.1}
+        />
+
+        <AchievementSection
           title={t.competitions}
           items={achievements.competitions}
-          delay={0.2}
+          delay={0.3}
         />
 
         <AchievementSection
           title={t.certifications}
           items={achievements.certifications}
-          delay={0.4}
+          delay={0.5}
         />
 
         <AchievementSection
           title={t.awards}
           items={achievements.awards}
-          delay={0.6}
+          delay={0.7}
         />
       </div>
     </div>

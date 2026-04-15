@@ -8,6 +8,9 @@ import project2Image from '../assets/images/project2-min.jpg';
 import project3Image from '../assets/images/project3-min.jpg';
 import project4Image from '../assets/images/project4-min.jpg';
 import project5Image from '../assets/images/project5-min.jpg';
+import gymWebsiteImage from '../assets/images/gym-website.jpg';
+import sportsClubImage from '../assets/images/sports-club.jpg';
+import dutWebLabImage from '../assets/images/dut-weblab.jpg';
 
 // Language content
 const content = {
@@ -20,7 +23,8 @@ const content = {
       all: "All",
       web: "Web Development",
       ai: "AI & ML",
-      robotics: "Robotics"
+      robotics: "Robotics",
+      university: "University Projects"
     }
   },
   fr: {
@@ -32,7 +36,8 @@ const content = {
       all: "Tous",
       web: "Développement Web",
       ai: "IA & ML",
-      robotics: "Robotique"
+      robotics: "Robotique",
+      university: "Projets Universitaires"
     }
   }
 };
@@ -83,6 +88,33 @@ const projectsData = [
     category: "robotics",
     source_code_link: null,
     live_demo_link: null
+  },
+  {
+    title: "Gym Website",
+    description: "A responsive showcase website for a fitness club built with HTML5, CSS3, and JavaScript. Features include a homepage, pricing plans, class schedule, and a contact form with full mobile responsiveness.",
+    image: gymWebsiteImage,
+    tags: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    category: "web",
+    source_code_link: null,
+    live_demo_link: null
+  },
+  {
+    title: "Sports Club Management App",
+    description: "A database-driven application for managing gym memberships using SQL. Supports member registration, subscription tracking, and payment history through CRUD operations.",
+    image: sportsClubImage,
+    tags: ["SQL", "Database", "CRUD"],
+    category: "university",
+    source_code_link: null,
+    live_demo_link: null
+  },
+  {
+    title: "DUT WebLab",
+    description: "A multi-section interactive web application built as a university mini-project. Features dynamic navigation, responsive layout, and modern CSS3 techniques.",
+    image: dutWebLabImage,
+    tags: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    category: "university",
+    source_code_link: null,
+    live_demo_link: null
   }
 ];
 
@@ -130,9 +162,8 @@ const ProjectCard = ({ project, t }) => {
             alt={project.title}
             loading="lazy"
             decoding="async"
-            className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
             onLoad={handleImageLoad}
             style={{ transition: 'opacity 0.3s ease-in-out' }}
           />
@@ -230,11 +261,10 @@ const Projects = ({ language }) => {
               <motion.button
                 key={key}
                 onClick={() => handleCategoryChange(key)}
-                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeCategory === key
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === key
                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md shadow-blue-500/30'
                     : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/70 hover:text-white'
-                }`}
+                  }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

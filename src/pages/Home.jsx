@@ -15,7 +15,7 @@ const content = {
   en: {
     greeting: "Hi, I'm",
     name: "Mohamed Haroun Kaida",
-    title: "Future Software Engineer | Robotics & AI Enthusiast",
+    title: "Software Engineering Student | AI & Web Development Enthusiast",
     scrollDown: "Scroll down to explore",
     sections: {
       about: "About Me",
@@ -28,7 +28,7 @@ const content = {
   fr: {
     greeting: "Bonjour, je suis",
     name: "Mohamed Haroun Kaida",
-    title: "Futur Ingénieur Logiciel | Passionné de Robotique & IA",
+    title: "Étudiant en Génie Logiciel | Passionné d'IA & Développement Web",
     scrollDown: "Défilez pour explorer",
     sections: {
       about: "À Propos de Moi",

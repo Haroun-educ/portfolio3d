@@ -7,28 +7,33 @@ const content = {
     title: "About Me",
     subtitle: "My Introduction",
     description: [
-      "I am a Moroccan student passionate about digital technologies — a true digital native who grew up with computers, smartphones, and the internet. Curious, creative, and analytical, I have a strong passion for problem-solving and innovation.",
-      "I am currently studying at the École Supérieure de Technologie (EST) in Dakhla, where I am building a strong foundation in computer science and engineering. This academic path allows me to strengthen my technical skills and prepare for future opportunities in the field. then continue my studies at a prestigious engineering institution such as INPT, and eventually pursue an international academic path in Germany or the United States.",
-      "When I'm not studying, you can find me working on programming projects, participating in robotics competitions, or exploring the latest advancements in technology. I believe in continuous learning and am always looking for new challenges to expand my skills."
+      "I am a first-year student in Software Design and Development (DUT CDL) at the École Supérieure de Technologie (EST) in Dakhla, Morocco. Passionate about programming, web development, and artificial intelligence, I am focused on building a strong foundation in software engineering.",
+      "My academic journey at EST Dakhla allows me to deepen my technical skills in areas such as C programming, web technologies, databases, UML modeling, and computer networks. I plan to continue my studies at a prestigious engineering institution such as INPT, with long-term ambitions for an international career.",
+      "When I'm not studying, you can find me working on programming projects, exploring the latest advancements in technology, or sharpening my problem-solving skills. I believe in continuous learning and am always looking for new challenges."
     ],
     education: "Education",
     experience: "Experience",
     interests: "Interests",
     educationItems: [
       {
+        degree: "DUT in Software Design and Development (CDL)",
+        institution: "EST Dakhla",
+        year: "2025 – 2026 (in progress)"
+      },
+      {
         degree: "Baccalaureate in Physical Sciences (French Track)",
-        institution: "In Progress",
-        year: "2024 - 2025"
+        institution: "Obtained",
+        year: "2024 – 2025"
       },
       {
         degree: "Middle School Education",
         institution: "Ibn Battouta Middle School",
-        year: "2019 - 2022"
+        year: "2019 – 2022"
       },
       {
         degree: "Primary School Education",
         institution: "École Ali ibn Abi Talib Primary School",
-        year: "2017 - 2019"
+        year: "2017 – 2019"
       }
     ],
     experienceItems: [
@@ -57,28 +62,33 @@ const content = {
     title: "À Propos de Moi",
     subtitle: "Mon Introduction",
     description: [
-      "Je suis un étudiant marocain passionné par les technologies numériques — un véritable natif du numérique qui a grandi avec les ordinateurs, les smartphones et Internet. Curieux, créatif et analytique, j'ai une forte passion pour la résolution de problèmes et l'innovation.",
-      "Je poursuis actuellement mes étude à l'école Supérieure de Technologie (EST) de Dakhla, où je construis une solide base en informatique . Ce parcours académique me permet de renforcer mes compétences technique et de me préparer à de futures opportunités dans le domaine. puis de poursuivre mes études dans une institution d'ingénierie prestigieuse comme l'INPT, et éventuellement suivre un parcours académique international en Allemagne ou aux États-Unis.",
-      "Quand je n'étudie pas, vous pouvez me trouver en train de travailler sur des projets de programmation, de participer à des compétitions de robotique, ou d'explorer les dernières avancées technologiques. Je crois en l'apprentissage continu et je suis toujours à la recherche de nouveaux défis pour développer mes compétences."
+      "Je suis étudiant en première année de Conception et Développement de Logiciels (DUT CDL) à l'École Supérieure de Technologie (EST) de Dakhla, Maroc. Passionné par la programmation, le développement web et l'intelligence artificielle, je me concentre sur la construction d'une solide base en génie logiciel.",
+      "Mon parcours académique à l'EST Dakhla me permet d'approfondir mes compétences techniques dans des domaines tels que la programmation en C, les technologies web, les bases de données, la modélisation UML et les réseaux informatiques. Je prévois de poursuivre mes études dans une institution d'ingénierie prestigieuse comme l'INPT, avec des ambitions internationales à long terme.",
+      "Quand je n'étudie pas, vous pouvez me trouver en train de travailler sur des projets de programmation, d'explorer les dernières avancées technologiques ou d'affiner mes compétences en résolution de problèmes. Je crois en l'apprentissage continu et je suis toujours à la recherche de nouveaux défis."
     ],
     education: "Éducation",
     experience: "Expérience",
     interests: "Intérêts",
     educationItems: [
       {
+        degree: "DUT en Conception et Développement de Logiciels (CDL)",
+        institution: "EST Dakhla",
+        year: "2025 – 2026 (en cours)"
+      },
+      {
         degree: "Baccalauréat en Sciences Physiques (Filière Française)",
-        institution: "En cours",
-        year: "2024 - 2025"
+        institution: "Obtenu",
+        year: "2024 – 2025"
       },
       {
         degree: "Éducation Collégiale",
         institution: "Collège Ibn Battouta",
-        year: "2019 - 2022"
+        year: "2019 – 2022"
       },
       {
         degree: "Éducation Primaire",
         institution: "École Primaire Ali ibn Abi Talib",
-        year: "2017 - 2019"
+        year: "2017 – 2019"
       }
     ],
     experienceItems: [
@@ -147,7 +157,9 @@ const About = ({ language }) => {
               </div>
               <div className="text-center">
                 <h3 className="text-xl font-medium text-white">Mohamed Haroun</h3>
-                <p className="text-secondary mt-1">Student & Technology Enthusiast</p>
+                <p className="text-secondary mt-1">
+                  {language === 'fr' ? 'Étudiant en CDL — EST Dakhla' : 'CDL Student — EST Dakhla'}
+                </p>
               </div>
             </div>
           </motion.div>
