@@ -17,7 +17,7 @@ const content = {
     location: "Location",
     locationValue: "Fez, Morocco",
     emailAddress: "Email",
-    emailValue: "contact@example.com",
+    emailValue: "harounneduc@gmail.com",
     phone: "Phone",
     phoneValue: "+212 000-000000",
     socialProfiles: "Social Profiles",
@@ -40,7 +40,7 @@ const content = {
     location: "Emplacement",
     locationValue: "Fez, Maroc",
     emailAddress: "Email",
-    emailValue: "contact@example.com",
+    emailValue: "harounneduc@gmail.com",
     phone: "Téléphone",
     phoneValue: "+212 000-000000",
     socialProfiles: "Profils Sociaux",
@@ -188,9 +188,8 @@ const Contact = ({ language }) => {
                   id="name"
                   value={formValues.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    formErrors.name ? 'border border-red-500' : ''
-                  }`}
+                  className={`w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${formErrors.name ? 'border border-red-500' : ''
+                    }`}
                 />
                 {formErrors.name && (
                   <p className="mt-1 text-sm text-red-400">{formErrors.name}</p>
@@ -207,9 +206,8 @@ const Contact = ({ language }) => {
                   id="email"
                   value={formValues.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    formErrors.email ? 'border border-red-500' : ''
-                  }`}
+                  className={`w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${formErrors.email ? 'border border-red-500' : ''
+                    }`}
                 />
                 {formErrors.email && (
                   <p className="mt-1 text-sm text-red-400">{formErrors.email}</p>
@@ -226,9 +224,8 @@ const Contact = ({ language }) => {
                   rows="5"
                   value={formValues.message}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    formErrors.message ? 'border border-red-500' : ''
-                  }`}
+                  className={`w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${formErrors.message ? 'border border-red-500' : ''
+                    }`}
                 ></textarea>
                 {formErrors.message && (
                   <p className="mt-1 text-sm text-red-400">{formErrors.message}</p>
@@ -238,11 +235,10 @@ const Contact = ({ language }) => {
               <button
                 type="submit"
                 disabled={formStatus === 'submitting'}
-                className={`w-full px-6 py-3 ${
-                  formStatus === 'submitting'
+                className={`w-full px-6 py-3 ${formStatus === 'submitting'
                     ? 'bg-blue-500 cursor-not-allowed'
                     : 'bg-blue-600 hover:bg-blue-700'
-                } transition-colors rounded-lg text-white font-medium`}
+                  } transition-colors rounded-lg text-white font-medium`}
               >
                 {formStatus === 'submitting' ? t.sending : t.send}
               </button>
