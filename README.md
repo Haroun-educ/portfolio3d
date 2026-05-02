@@ -161,5 +161,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 **Mohamed Haroun Kaida** - Student & Technology Enthusiast
 
 - GitHub: [Haroun-educ](https://github.com/Haroun-educ)
-- LinkedIn: [Mohamed Haroun Kaida](https://www.linkedin.com/in/haroun-educ/)
+- LinkedIn: [Mohamed Haroun Kaida](https://www.linkedin.com/in/med-haroun/)
 - Linktree: [Harouneduc](https://linktr.ee/Harouneduc)
